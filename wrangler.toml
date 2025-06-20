@@ -1,0 +1,13 @@
+name = "aris-wallet"
+compatibility_date = "2024-06-20"
+
+[env.production]
+compatibility_date = "2024-06-20"
+
+[vars]
+NODE_ENV = "production"
+
+[[env.production.kv_namespaces]]
+binding = "KV"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
