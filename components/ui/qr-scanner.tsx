@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { QrScanner as ReactQrScanner } from "@yudiel/react-qr-scanner"
+import { Scanner as ReactQrScanner } from "@yudiel/react-qr-scanner"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { QrCode, X } from "lucide-react"

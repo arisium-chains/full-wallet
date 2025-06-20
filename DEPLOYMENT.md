@@ -4,35 +4,7 @@ This guide explains how to deploy the ARIS Wallet to Cloudflare Pages with full 
 
 ## 🚀 **Quick Deployment Steps**
 
-### **1. Install Wrangler CLI**
-
-```bash
-npm install -g wrangler
-# or use the local version
-npm install wrangler
-```
-
-### **2. Login to Cloudflare**
-
-```bash
-wrangler login
-```
-
-### **3. Create Cloudflare Pages Project**
-
-```bash
-npm run deploy:setup
-```
-
-### **4. Build and Deploy**
-
-```bash
-npm run deploy:cloudflare
-```
-
-### **5. Alternative: Dashboard Deployment**
-
-#### **Via Cloudflare Dashboard**
+### **Via Cloudflare Dashboard (Recommended)**
 
 1. **Login to Cloudflare Dashboard**
    - Go to [Cloudflare Pages](https://pages.cloudflare.com/)
@@ -45,18 +17,20 @@ npm run deploy:cloudflare
 3. **Configure Build Settings**
    ```
    Framework preset: Next.js
-   Build command: npm run build
+   Build command: pnpm run build
    Build output directory: .next
    Root directory: /
    Node.js version: 18
    ```
+
+   **IMPORTANT**: Do NOT set a deploy command. Cloudflare Pages handles deployment automatically.
 
 4. **Set Environment Variables**
    - Go to Settings → Environment Variables
    - Add all variables from `.env.example`
    - Make sure to use production URLs for PocketBase
 
-### **3. Environment Variables for Production**
+### **Environment Variables for Production**
 
 Copy these to Cloudflare Pages environment variables:
 
@@ -76,7 +50,7 @@ NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=your_bot_token
 NEXT_PUBLIC_EXP_BLOCKSCOUNT_URL=https://exp.0xl3.com
 ```
 
-### **4. Configure Bot Domains**
+### **Configure Bot Domains**
 
 #### **Telegram Bot Configuration**
 ```
@@ -97,8 +71,6 @@ NEXT_PUBLIC_EXP_BLOCKSCOUNT_URL=https://exp.0xl3.com
 
 ```
 ├── .next/                   # Next.js build output
-├── functions/               # Cloudflare Pages Functions
-│   └── _middleware.ts       # CORS and security middleware
 ├── app/
 │   └── api/                 # API routes (fully supported)
 ├── components/
@@ -106,7 +78,6 @@ NEXT_PUBLIC_EXP_BLOCKSCOUNT_URL=https://exp.0xl3.com
 ├── src/
 │   ├── services/auth/       # Authentication services
 │   └── hooks/user/          # User management hooks
-├── wrangler.toml           # Cloudflare configuration
 ├── next.config.mjs         # Next.js configuration
 └── DEPLOYMENT.md          # This file
 ```
@@ -139,8 +110,15 @@ rm -rf node_modules package-lock.json
 npm install
 
 # Build again
-npm run build:static
+npm run build
 ```
+
+### **Deployment Command Issues**
+If you see "npx wrangler deploy" errors:
+1. Make sure wrangler is NOT installed: `npm uninstall wrangler`
+2. Clear node_modules: `rm -rf node_modules && npm install`
+3. In Cloudflare Pages settings, ensure "Deploy command" is empty
+4. Only "Build command" should be set to: `pnpm run build`
 
 ### **Authentication Issues**
 1. **Check environment variables** are set in Cloudflare Pages
@@ -148,7 +126,7 @@ npm run build:static
 3. **Test PocketBase connectivity** from production domain
 
 ### **Routing Issues**
-- Ensure `_redirects` file is in the `out/` directory
+- Ensure Next.js is properly configured for production
 - Check Cloudflare Pages routing configuration
 
 ## 🌐 **Production Checklist**
@@ -157,24 +135,24 @@ npm run build:static
 - [ ] Telegram bot domain set to production URL
 - [ ] LINE LIFF app domain updated
 - [ ] PocketBase CORS configured for production domain
-- [ ] Build output (`out/`) successfully generated
-- [ ] `_redirects` file included in build output
+- [ ] Build command set to `pnpm run build`
+- [ ] Deploy command is EMPTY (not set)
 - [ ] SSL certificate active on custom domain (if used)
 
 ## 📊 **Performance Optimization**
 
-The static deployment provides:
-- **Fast Loading**: Pre-built static files
+Cloudflare Pages provides:
+- **Fast Loading**: Optimized Next.js builds
 - **Global CDN**: Cloudflare's edge network
-- **Caching**: Aggressive caching for static assets
-- **Security**: No server-side attack surface
+- **Caching**: Intelligent caching for static and dynamic content
+- **Security**: Built-in DDoS protection
 
 ## 🔐 **Security Considerations**
 
-- **Client-Side Auth**: All authentication happens in browser
-- **Environment Variables**: Only client-safe variables included
-- **API Keys**: Sensitive keys not exposed in static build
-- **HTTPS**: Always use HTTPS in production
+- **Environment Variables**: Sensitive keys protected on server
+- **API Routes**: Secure server-side endpoints
+- **HTTPS**: Always enforced in production
+- **Edge Runtime**: Additional security layer
 
 ---
 
