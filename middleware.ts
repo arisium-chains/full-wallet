@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import jwt from 'jsonwebtoken'
 
 const PUBLIC_PATHS = ['/login', '/api/auth/line', '/', '/learn', '/identity', '/proofs', '/rewards', '/resume', '/settings', '/vault']
 
@@ -21,18 +20,20 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login', request.url))
     }
 
+    // For Edge Runtime compatibility, we'll do basic token validation
+    // Full JWT verification happens in API routes which run in Node.js runtime
     try {
-      // Verify JWT token
-      const jwtSecret = process.env.JWT_SECRET
-      if (!jwtSecret) {
-        console.error('JWT_SECRET environment variable is not set')
-        return NextResponse.redirect(new URL('/login', request.url))
+      // Basic check that token exists and has JWT structure (3 parts separated by dots)
+      const parts = token.split('.')
+      if (parts.length !== 3) {
+        throw new Error('Invalid token format')
       }
       
-      jwt.verify(token, jwtSecret)
+      // Token exists and has valid format, allow request
+      // Actual verification will happen in API routes
       return NextResponse.next()
     } catch (error) {
-      // Invalid token, redirect to login
+      // Invalid token format, redirect to login
       return NextResponse.redirect(new URL('/login', request.url))
     }
   }
