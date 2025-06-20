@@ -21,6 +21,8 @@ A modern Web3 wallet application with dual authentication support (LINE + Telegr
    Node.js version: 18
    Environment variables: [See below]
    ```
+   
+   **Important**: Deploy via Cloudflare Pages Dashboard (NOT Wrangler CLI)
 
 ### **Environment Variables for Production**
 
@@ -135,8 +137,6 @@ npm run lint         # Run ESLint
 │   ├── services/         # Business logic
 │   ├── hooks/            # Custom React hooks
 │   └── server/           # Server-side utilities
-├── functions/            # Cloudflare Pages Functions
-├── wrangler.toml         # Cloudflare configuration
 └── DEPLOYMENT.md         # Detailed deployment guide
 ```
 

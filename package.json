@@ -8,8 +8,7 @@
     "lint": "next lint",
     "start": "next start",
     "build:cloudflare": "next build",
-    "deploy:cloudflare": "npm run build:cloudflare && wrangler pages deploy .next --project-name aris-wallet",
-    "deploy:setup": "wrangler pages create aris-wallet",
+    "deploy:cloudflare": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -82,8 +81,7 @@
     "thirdweb": "^5.61.6",
     "uuid": "^11.1.0",
     "vaul": "^0.9.6",
-    "zod": "^3.24.1",
-    "wrangler": "^3.0.0"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
