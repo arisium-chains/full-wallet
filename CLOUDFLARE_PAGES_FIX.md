@@ -16,19 +16,27 @@ Go to your Cloudflare Pages project dashboard:
    - **Framework preset**: Next.js
    - **Node.js version**: 18
 
-### 2. Important Notes
+### 2. Add Compatibility Flags
+
+For the Node.js compatibility error:
+1. Go to **Settings** → **Functions** → **Compatibility flags**
+2. Add `nodejs_compat` to both:
+   - **Production compatibility flags**
+   - **Preview compatibility flags**
+
+### 3. Important Notes
 
 - ✅ Build command should be: `pnpm run build`
 - ❌ Deploy command should be: **EMPTY** (delete any value)
 - ✅ Build output directory: `.next`
 
-### 3. Why This Works
+### 4. Why This Works
 
 - Cloudflare Pages automatically handles deployment after build
 - No manual deploy command is needed
 - Wrangler is for Workers, not Pages
 
-### 4. Verification
+### 5. Verification
 
 After updating settings:
 1. Save changes
