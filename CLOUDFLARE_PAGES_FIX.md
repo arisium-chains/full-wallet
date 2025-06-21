@@ -18,6 +18,16 @@ Go to your Cloudflare Pages project dashboard:
 
 ### 2. Add Compatibility Flags
 
+#### Option A: Using wrangler.toml (Recommended)
+Create or edit `wrangler.toml` in your project root:
+```toml
+# Cloudflare Pages configuration
+name = "aris-wallet"
+compatibility_date = "2024-06-21"
+compatibility_flags = ["nodejs_compat"]
+```
+
+#### Option B: Via Dashboard
 For the Node.js compatibility error:
 1. Go to **Settings** → **Functions** → **Compatibility flags**
 2. Add `nodejs_compat` to both:
