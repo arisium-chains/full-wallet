@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server'
 import { withAuth } from '@/src/server/middlewares/auth.middleware'
 import { createWallet } from '@/src/server/services/user.service'

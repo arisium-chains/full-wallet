@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextResponse } from "next/server";
 import { getPocketBaseAdmin } from "@/src/server/libs/pkbase.lib";
 

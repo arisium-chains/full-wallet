@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextResponse, type NextRequest } from 'next/server';
 
 import { withAuth } from '@/src/server/middlewares/auth.middleware';
