@@ -1,0 +1,9 @@
+# Cloudflare Pages configuration
+name = "aris-wallet"
+compatibility_date = "2024-06-21"
+
+[build]
+command = ""
+
+[site]
+bucket = ".vercel/output/static"
