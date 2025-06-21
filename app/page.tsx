@@ -134,7 +134,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                    Good morning, Alex! 🌟
+                    Welcome to ARIS Wallet! 🌟
                   </h1>
                   <p className="text-slate-600 text-lg">Ready to continue your Web3 learning journey?</p>
                 </div>
