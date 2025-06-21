@@ -40,7 +40,7 @@ export async function POST(
     }
 
     // Validate auth data based on provider
-    const validationResult = validateAuthData(provider, authData);
+    const validationResult = await validateAuthData(provider, authData);
     if (!validationResult.valid) {
       return NextResponse.json(
         { error: validationResult.error },
@@ -102,12 +102,12 @@ export async function POST(
 /**
  * Validate authentication data based on provider type
  */
-function validateAuthData(provider: AuthProviderType, authData: any): { valid: boolean; error?: string } {
+async function validateAuthData(provider: AuthProviderType, authData: any): Promise<{ valid: boolean; error?: string }> {
   switch (provider) {
     case 'line':
       return validateLineAuthData(authData);
     case 'telegram':
-      return validateTelegramAuthData(authData);
+      return await validateTelegramAuthData(authData);
     default:
       return { valid: false, error: `Unknown provider: ${provider}` };
   }
@@ -136,7 +136,7 @@ function validateLineAuthData(authData: any): { valid: boolean; error?: string }
 /**
  * Validate Telegram authentication data
  */
-function validateTelegramAuthData(authData: any): { valid: boolean; error?: string } {
+async function validateTelegramAuthData(authData: any): Promise<{ valid: boolean; error?: string }> {
   // Basic validation for required fields
   if (!authData.id || !authData.first_name || !authData.auth_date || !authData.hash) {
     return { 
@@ -154,7 +154,7 @@ function validateTelegramAuthData(authData: any): { valid: boolean; error?: stri
   }
 
   // Perform server-side hash validation
-  return validateTelegramHash(authData, botToken);
+  return await validateTelegramHash(authData, botToken);
 }
 
 /**
