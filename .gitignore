@@ -6,6 +6,8 @@
 # next.js
 /.next/
 /out/
+# exclude large webpack cache files
+.next/cache/webpack/
 
 # production
 /build

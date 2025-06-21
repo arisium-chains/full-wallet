@@ -9,6 +9,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    webpackBuildWorker: false,
+  },
+  distDir: '.next',
+  generateBuildId: async () => {
+    // Use a timestamp-based build ID for consistency
+    return `build-${Date.now()}`
+  },
 }
 
 export default nextConfig
